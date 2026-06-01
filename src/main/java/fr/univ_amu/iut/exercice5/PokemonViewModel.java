@@ -1,6 +1,8 @@
 package fr.univ_amu.iut.exercice5;
 
 import com.google.inject.Inject;
+import java.util.Optional;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -37,6 +39,8 @@ public class PokemonViewModel {
     //
     // - pokemons.setAll(service.tousLesPokemons());
     // - resume.bind(Bindings.size(pokemons).asString().concat(" Pokémon"));
+    pokemons.setAll(service.tousLesPokemons());
+    resume.bind(Bindings.size(pokemons).asString().concat(" Pokémon"));
   }
 
   public ObservableList<Pokemon> pokemonsProperty() {
@@ -63,11 +67,24 @@ public class PokemonViewModel {
     // TODO exercice 5 : ajouter le Pokémon recherché.
     //
     // 1. Demander au service le Pokémon nommé `recherche.get()`
-    //    (service.chercherParNom(...), qui renvoie un Optional).
+    // (service.chercherParNom(...), qui renvoie un Optional).
     // 2. S'il existe ET n'est pas déjà dans la liste : l'ajouter, vider la
-    //    recherche et le statut.
-    //    S'il est déjà présent : publier un statut (sans l'ajouter en double).
-    //    S'il n'existe pas : publier un statut "introuvable".
+    // recherche et le statut.
+    // S'il est déjà présent : publier un statut (sans l'ajouter en double).
+    // S'il n'existe pas : publier un statut "introuvable".
     // Astuce : Optional offre ifPresentOrElse(present, absent).
+    Optional<String> optionalValue = service.chercherParNom(recherche.get());
+    optionalValue.ifPresentOrElse(
+        pokemon -> {
+          if (pokemons.contains(pokemon)) statut.set("pas de doublon");
+          else {
+            pokemons.add(pokemon);
+            recherche.set("");
+            statut.set("");
+          }
+        },
+        () -> {
+          statut.set("introuvable");
+        });
   }
 }

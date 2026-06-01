@@ -15,7 +15,7 @@ class PokemonViewModelTest {
     return new PokemonViewModel(new PokemonService());
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void au_demarrage_la_liste_contient_les_pokemon_de_depart() {
     assertThat(vm().pokemonsProperty())
@@ -23,13 +23,13 @@ class PokemonViewModelTest {
         .hasSize(6);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void le_resume_reflete_le_nombre_de_pokemon() {
     assertThat(vm().resumeProperty().get()).isEqualTo("6 Pokémon");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void ajouter_par_nom_ajoute_le_pokemon_trouve_et_met_a_jour_le_resume() {
     PokemonViewModel vm = vm();
