@@ -2,7 +2,6 @@ package fr.univ_amu.iut.exercice5;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -44,7 +43,7 @@ class PokemonViewModelTest {
         .isEqualTo("7 Pokémon");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void ajouter_un_nom_inconnu_laisse_la_liste_intacte_et_affiche_un_statut() {
     PokemonViewModel vm = vm();
@@ -56,7 +55,7 @@ class PokemonViewModelTest {
     assertThat(vm.statutProperty().get()).as("un statut clair doit être publié").isNotEmpty();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void ajouter_un_pokemon_deja_present_ne_le_duplique_pas() {
     PokemonViewModel vm = vm();
@@ -68,7 +67,7 @@ class PokemonViewModelTest {
     assertThat(vm.statutProperty().get()).isNotEmpty();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void la_recherche_ignore_la_casse_et_les_accents() {
     PokemonViewModel vm = vm();
