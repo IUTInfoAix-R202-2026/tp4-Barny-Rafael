@@ -73,11 +73,12 @@ public class PokemonViewModel {
     // S'il est déjà présent : publier un statut (sans l'ajouter en double).
     // S'il n'existe pas : publier un statut "introuvable".
     // Astuce : Optional offre ifPresentOrElse(present, absent).
-    Optional<String> optionalValue = service.chercherParNom(recherche.get());
+    Optional<Pokemon> optionalValue = service.chercherParNom(recherche.get());
     optionalValue.ifPresentOrElse(
         pokemon -> {
-          if (pokemons.contains(pokemon)) statut.set("pas de doublon");
-          else {
+          if (pokemons.contains(pokemon)) {
+            statut.set("pas de doublon");
+          } else {
             pokemons.add(pokemon);
             recherche.set("");
             statut.set("");
